@@ -4,9 +4,12 @@
   "description": "An instant Voting System",
   "main": "app.js",
   "dependencies": {
+    "bluebird": "^3.1.1",
     "bookshelf": "^0.9.1",
     "knex": "^0.9.0",
-    "mysql": "^2.10.0"
+    "lodash": "^3.10.1",
+    "mysql": "^2.10.0",
+    "when": "^3.7.7"
   },
   "devDependencies": {},
   "scripts": {
