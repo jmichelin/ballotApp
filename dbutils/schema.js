@@ -1,82 +1,41 @@
-/*
-CREATE TABLE `ballot` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`ballotName` varchar(255) NOT NULL,
-	`createdOn` TIMESTAMP NOT NULL,
-	`status` varchar(255) NOT NULL,
-	`owningTemplateID` INT NOT NULL,
-	`scheduledForTime` DATETIME NOT NULL,
-	`ballotCode` varchar(32) NOT NULL,
-	PRIMARY KEY (`id`)
-);
+let Schema = {
+  ballot: {                                                                     // CREATE TABLE `ballot` (
+    id: { type: 'increments', nullable: false, primary: true },                 //`id` INT NOT NULL AUTO_INCREMENT,
+    ballot_name: { type: 'string', maxlength: 254, nullable: false },           //`ballotName` varchar(255) NOT NULL,
+    status: { type: 'string', maxlength: 20, nullable: false, }.                //`status` varchar(255) NOT NULL,
+    template_id: { type: 'integer', nullable: true, unsigned: true },           //`owningTemplateID` INT  NULL,
+    sceduled_on: { type: 'datetime', nullable: true },                          //`scheduledForTime` DATETIME  NULL,
+    ballot_code: { type: 'string', maxlength: 32, nullable: false }             //`ballotCode` varchar(32) NOT NULL,
+    created_at: { type: 'dateTime', nullable: false },                          //`createdOn` TIMESTAMP  NULL,
+    updated_at: { type: 'dateTime', nullable: true }                            //`updatedAt` DATETIME NULL
+  },
 
-CREATE TABLE `ballotOption` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`owiningBallotID` INT NOT NULL,
-	`ballotOptionName` varchar(255) NOT NULL,
-	`numVotes` INT NOT NULL,
-	PRIMARY KEY (`id`)
-);
+  ballot_option: {                                                              // CREATE TABLE `ballotOption` (
+    id: { type: 'increments', nullable: false, primary: true },                 // 	`id` INT NOT NULL AUTO_INCREMENT,
+    ballot_id: { type: 'integer', nullable: false, unsigned: true },            // 	`owiningBallotID` INT NOT NULL,
+    ballot_option_name: { type: 'text', maxlength: 60, nullable: false },       // 	`ballotOptionName` varchar(255) NOT NULL,
+    number_option_votes: { type: 'integer',   nullable: true }                  // 	`numVotes` INT NOT NULL,
+  },
 
-CREATE TABLE `userProfile` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`username` varchar(255) NOT NULL,
-	`email` varchar(255) NOT NULL,
-	`phone` varchar(16) NOT NULL,
-	`userType` varchar(25) NOT NULL,
-	`authProvider` varchar(255) NOT NULL,
-	`status` varchar(255) NOT NULL,
-	PRIMARY KEY (`id`)
-);
+  user_profile: {                                                               // CREATE TABLE `userProfile` (
+    id: { type: 'increments', nullable: false, primary: true },                 // 	`id` INT NOT NULL AUTO_INCREMENT,
+    name: { type: 'string', maxlength: 120, nullable: false },                  // 	`username` varchar(255) NOT NULL,
+    email: { type: 'string', maxlength: 254, nullable: false, unique: true },   // 	`email` varchar(255) NOT NULL,
+    phone: { type: 'string', maxlength: 16, nullable: true, unique: true },     // 	`phone` varchar(16) NOT NULL,
+    role: { type: 'string', maxlength: 20, nullable: true },                    // 	`userType` varchar(25) NOT NULL,
+    auth_provider: { type: 'string', maxlength: 100, nullable: true },          // 	`authProvider` varchar(255) NOT NULL,
+    status: { type: 'string', maxlength: 100, nullable: true }                  // 	`status` varchar(255) NOT NULL,
+  },
 
-CREATE TABLE `group` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
-	PRIMARY KEY (`id`)
-);
+  ballot_group: {                                                               // CREATE TABLE `group` (
+    id: { type: 'increments', nullable: false, primary: true },                 // 	`id` INT NOT NULL AUTO_INCREMENT,
+    group_name: { type: 'string', maxlength: 254, nullable: false },            // 	`name` varchar(255) NOT NULL,
+  },
 
-CREATE TABLE `userVote` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`owningUserID` INT NOT NULL,
-	`owningBallotOption` INT NOT NULL,
-	PRIMARY KEY (`id`)
-);
+  user_vote: {                                                                  // CREATE TABLE `userVote` (
+    id: { type: 'increments', nullable: false, primary: true },                 // 	`id` INT NOT NULL AUTO_INCREMENT,
+    user_id: { type: 'integer', nullable: false, unsigned: true },              // 	`owningUserID` INT NOT NULL,
+    ballot_option_id: { type: 'integer', nullable: false, unsigned: true }      // 	`owningBallotOption` INT NOT NULL,
+  }
 
-CREATE TABLE `ballotUserXref` (
-	`owningBallotID` INT NOT NULL,
-	`owningUserID` INT NOT NULL,
-	`userBallotRole` varchar(12) NOT NULL,
-	`ballotOptionVote` varchar(255) NOT NULL
-);
-
-CREATE TABLE `userGroupXref` (
-	`owningUserID` INT NOT NULL,
-	`owningGroupID` INT NOT NULL
-);
-
-CREATE TABLE `groupBallotXref` (
-	`owningGroupID` INT NOT NULL,
-	`owningBallotID` INT NOT NULL
-);
-
-ALTER TABLE `ballotOption` ADD CONSTRAINT `ballotOption_fk0` FOREIGN KEY (`owiningBallotID`) REFERENCES `ballot`(`id`);
-
-ALTER TABLE `userVote` ADD CONSTRAINT `userVote_fk0` FOREIGN KEY (`owningUserID`) REFERENCES `userProfile`(`id`);
-
-ALTER TABLE `userVote` ADD CONSTRAINT `userVote_fk1` FOREIGN KEY (`owningBallotOption`) REFERENCES `ballot`(`id`);
-
-ALTER TABLE `ballotUserXref` ADD CONSTRAINT `ballotUserXref_fk0` FOREIGN KEY (`owningBallotID`) REFERENCES `ballot`(`id`);
-
-ALTER TABLE `ballotUserXref` ADD CONSTRAINT `ballotUserXref_fk1` FOREIGN KEY (`owningUserID`) REFERENCES `userProfile`(`id`);
-
-ALTER TABLE `userGroupXref` ADD CONSTRAINT `userGroupXref_fk0` FOREIGN KEY (`owningUserID`) REFERENCES `userProfile`(`id`);
-
-ALTER TABLE `userGroupXref` ADD CONSTRAINT `userGroupXref_fk1` FOREIGN KEY (`owningGroupID`) REFERENCES `group`(`id`);
-
-ALTER TABLE `groupBallotXref` ADD CONSTRAINT `groupBallotXref_fk0` FOREIGN KEY (`owningGroupID`) REFERENCES `group`(`id`);
-
-ALTER TABLE `groupBallotXref` ADD CONSTRAINT `groupBallotXref_fk1` FOREIGN KEY (`owningBallotID`) REFERENCES `ballot`(`id`);
-
-
-
-*/
+};
