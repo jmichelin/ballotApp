@@ -1,5 +1,5 @@
-//'use strict'
+'use strict'
 
-require(./dbutils/connection.js);
+require('dbutils/connection.js');
 
-var Bookshelf = require('bookshelf')(knex);
+let Bookshelf = require('bookshelf')(knex);

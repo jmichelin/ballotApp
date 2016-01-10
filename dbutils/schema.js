@@ -1,11 +1,13 @@
+'use strict'
+
 let Schema = {
   ballot: {                                                                     // CREATE TABLE `ballot` (
     id: { type: 'increments', nullable: false, primary: true },                 //`id` INT NOT NULL AUTO_INCREMENT,
     ballot_name: { type: 'string', maxlength: 254, nullable: false },           //`ballotName` varchar(255) NOT NULL,
-    status: { type: 'string', maxlength: 20, nullable: false, }.                //`status` varchar(255) NOT NULL,
+    status: { type: 'string', maxlength: 20, nullable: false, },                //`status` varchar(255) NOT NULL,
     template_id: { type: 'integer', nullable: true, unsigned: true },           //`owningTemplateID` INT  NULL,
     sceduled_on: { type: 'datetime', nullable: true },                          //`scheduledForTime` DATETIME  NULL,
-    ballot_code: { type: 'string', maxlength: 32, nullable: false }             //`ballotCode` varchar(32) NOT NULL,
+    ballot_code: { type: 'string', maxlength: 32, nullable: false },             //`ballotCode` varchar(32) NOT NULL,
     created_at: { type: 'dateTime', nullable: false },                          //`createdOn` TIMESTAMP  NULL,
     updated_at: { type: 'dateTime', nullable: true }                            //`updatedAt` DATETIME NULL
   },
@@ -29,7 +31,7 @@ let Schema = {
 
   ballot_group: {                                                               // CREATE TABLE `group` (
     id: { type: 'increments', nullable: false, primary: true },                 // 	`id` INT NOT NULL AUTO_INCREMENT,
-    group_name: { type: 'string', maxlength: 254, nullable: false },            // 	`name` varchar(255) NOT NULL,
+    group_name: { type: 'string', maxlength: 254, nullable: false }            // 	`name` varchar(255) NOT NULL,
   },
 
   user_vote: {                                                                  // CREATE TABLE `userVote` (
@@ -39,3 +41,5 @@ let Schema = {
   }
 
 };
+
+module.exports = Schema;
