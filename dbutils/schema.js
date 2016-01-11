@@ -4,7 +4,8 @@ let Schema = {
   ballot: {                                                                     // CREATE TABLE `ballot` (
     id: { type: 'increments', nullable: false, primary: true },                 //`id` INT NOT NULL AUTO_INCREMENT,
     ballot_name: { type: 'string', maxlength: 254, nullable: false },           //`ballotName` varchar(255) NOT NULL,
-    status: { type: 'string', maxlength: 20, nullable: false, },                //`status` varchar(255) NOT NULL,
+    status: { type: 'string', maxlength: 20, nullable: false, },
+    user_id: { type: 'integer', nullable: false, unsigned: true },                //`status` varchar(255) NOT NULL,
     template_id: { type: 'integer', nullable: true, unsigned: true },           //`owningTemplateID` INT  NULL,
     sceduled_on: { type: 'datetime', nullable: true },                          //`scheduledForTime` DATETIME  NULL,
     ballot_code: { type: 'string', maxlength: 32, nullable: false },             //`ballotCode` varchar(32) NOT NULL,
