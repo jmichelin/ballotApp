@@ -1,6 +1,17 @@
 'use strict'
 
-require('dbutils/connection.js');
+//require('./dbutils/connection.js');
+let knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host      : 'mysqlcluster7.registeredsite.com',
+    user      : 'ballot_admin',
+    password  : '!Qaz2wsx3edc',
+    database  : 'greenfield_ballot',
+    charset   : 'utf8'
+  }
+});
+
 
 let Bookshelf = require('bookshelf')(knex);
 
@@ -11,7 +22,7 @@ let UserProfile = Bookshelf.Model.extend({
   userVotes: function () {
     return this.hasMany(UserVotes, 'user_id')
   }
-  
+
 });
 
 //user vote model
